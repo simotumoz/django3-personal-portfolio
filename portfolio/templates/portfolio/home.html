@@ -1,0 +1,144 @@
+
+<!doctype html>
+{% extends 'portfolio/base.html' %}
+<html lang="en">
+  <head>
+      {% load static %}
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'portfolio/custom.css' %}">
+  </head>
+  <body>
+
+
+    {% block content %}
+
+
+    {% load static %}
+
+
+
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-9 text-center">
+        <br>
+          <br>
+
+            <h1 id="hometext" class="font-weight-bold fs-1 alert alert-success"> Your portfolio </h1>
+        <br>
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center my-3">
+      <div class="col-5">
+        <img src="{% static 'portfolio/home.jpg' %}" class="img-fluid" alt="Responsive image" height="800px" width="800px">
+      </div>
+    </div>
+
+    <br>
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-9 text-center">
+        <h1 id="hometext" class="font-weight-bold">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam hendrerit commodo nisl, fermentum dignissim augue. Proin nibh sem, eleifend ac erat at, mollis scelerisque augue.
+            Aenean nec erat eget ex mollis tristique. Aenean mattis justo ut morbi."</h1>
+      </div>
+    </div>
+
+
+    <br>
+<hr>
+
+
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+              <img src="{% static 'portfolio/1.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+              <img src="{% static 'portfolio/2.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'portfolio/3.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+    </div>
+
+<hr>
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-9 text-center">
+        <br>
+        <h1 id="hometext" class="font-weight-bold alert alert-success"> Recent projects </h1>
+      </div>
+    </div>
+    <br>
+
+    <div class="row justify-content-center mb-3">
+          {% for project in projects %}
+          <div class="col-lg-4 col-md-7">
+
+            {% if project.url %}
+            <a href="{{ project.url }}">
+              <img src="{{ project.image.url }}" class="img-fluid mb-2" height="612px" width="612px">
+            </a>
+            {% else %}
+            <img src="{{ project.image.url }}" class="img-fluid mb-2" height="612px" width="612px">
+            {% endif %}
+            <div class="row justify-content-center mb-3">
+                <div class="col-md-9 text-center">
+                    <h3 >{{ project.title }}</h3>
+                    <p class="alert alert-info">{{ project.description }}</p>
+                </div>
+            </div>
+          </div>
+          {% endfor %}
+    </div>
+<hr>
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-9 text-center">
+        <br>
+        <h1 id="hometext" class="font-weight-bold alert alert-success"> Contact us </h1>
+      </div>
+    </div>
+    <br>
+    <form action="/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Your Name">
+          </div>
+          <div class="form-group">
+            <label for="surname">Surname </label>
+            <input type="text" name="surname" class="form-control" id="surname" placeholder="Your Surname">
+          </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com">
+              </div>
+          <div class="form-group">
+            <label for="text">Your message</label>
+            <textarea class="form-control" id="text" name="text" rows="3"></textarea>
+          </div>
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+              <strong>By submitting you accept our GDP policy</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+
+
+
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+

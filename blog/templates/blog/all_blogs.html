@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'portfolio/base.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blogs</title>
+</head>
+<body>
+    {% block content %}
+
+    <br>
+    <h1 id="blogtitle" class="font-weight-bold text-center">Blog</h1>
+
+    <h2 class="text-center mb-5 alert alert-success"> [Your name] has written {{blogs.count}} blog{{blogs.count|pluralize}} </h2>
+
+    {% for blog in blogs %}
+        <div class="row justify-content-center my-3">
+              <div class="col-md-10">
+                <a href="{% url 'blog:detail' blog.id %}">
+                  <h2>{{ blog.title }}</h2>
+                </a>
+                <h5 class="text-muted">{{ blog.data|date:'M d Y'|upper }}</h5>
+                <h4 class="alert alert-secondary">{{ blog.description|striptags|truncatechars:200 }}</h4>
+              </div>
+        </div>
+    {% endfor %}
+
+
+
+
+    {% endblock %}
+
+</body>
+</html>
